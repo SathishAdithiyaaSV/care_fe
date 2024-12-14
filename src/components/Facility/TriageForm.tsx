@@ -189,6 +189,10 @@ export const TriageForm = ({ facilityId, id }: Props) => {
   };
 
   const handleFormFieldChange = (event: FieldChangeEvent<unknown>) => {
+    
+    if (!/^\d*$/.test(event.value as string) && event.name !== "entry_date")
+      return;
+
     dispatch({
       type: "set_form",
       form: { ...state.form, [event.name]: event.value },
