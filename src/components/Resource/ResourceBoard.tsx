@@ -82,7 +82,7 @@ export default function BoardView() {
             value={qParams.title}
             onChange={(e) => updateQuery({ [e.name]: e.value })}
             placeholder={t("search_resource")}
-            className="w-full md:w-60"
+            className="w-full md:w-60 mb-1"
           />
           <Tabs
             tabs={[
