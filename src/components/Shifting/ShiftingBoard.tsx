@@ -109,7 +109,7 @@ export default function BoardView() {
             value={qParams.patient_name}
             onChange={(e) => updateQuery({ [e.name]: e.value })}
             placeholder={t("search_patient")}
-            className="w-full md:w-60 mb-1"
+            className="w-full md:w-60"
           />
 
           <Tabs
@@ -126,8 +126,8 @@ export default function BoardView() {
           <div className="flex w-full flex-col gap-2 lg:mr-4 lg:w-fit lg:flex-row lg:gap-4">
             <Button
               variant={"primary"}
-              size={"xl"}
               onClick={onListViewBtnClick}
+              className="h-10.8 px-4 py-2"
             >
               <CareIcon icon="l-list-ul" className="mr-2" />
               {t("list_view")}

@@ -225,14 +225,14 @@ export default function ListView() {
             value={qParams.title}
             onChange={(e) => updateQuery({ [e.name]: e.value })}
             placeholder={t("search_resource")}
-            className="w-full md:w-60 mb-1"
+            className="w-full md:w-60"
           />
 
           <div className="flex w-full flex-col gap-2 lg:mr-4 lg:w-fit lg:flex-row lg:gap-4">
             <Button
               variant={"primary"}
-              size={"xl"}
               onClick={onBoardViewBtnClick}
+              className="h-10.8 px-4 py-2"
             >
               <CareIcon icon="l-list-ul" className="mr-2" />
               {t("board_view")}
