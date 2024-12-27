@@ -47,6 +47,7 @@ const Form = <T extends FormDetails>({
   const [isLoading, setIsLoading] = useState(!!asyncGetDefaults);
   const [state, dispatch] = useAutoSaveReducer<T>(formReducer, initial);
   const formVals = useRef(props.defaults);
+  const [isChanged, setIsChanged] = useState(false);
 
   useEffect(() => {
     if (!asyncGetDefaults) return;
@@ -83,6 +84,7 @@ const Form = <T extends FormDetails>({
     } else if (props.resetFormValsOnSubmit) {
       dispatch({ type: "set_form", form: formVals.current });
     }
+    setIsChanged(false);
   };
 
   const handleCancel = () => {
@@ -90,6 +92,7 @@ const Form = <T extends FormDetails>({
       dispatch({ type: "set_form", form: formVals.current });
     }
     props.onCancel?.();
+    setIsChanged(false);
   };
 
   const { Provider, Consumer } = useMemo(() => createFormContext<T>(), []);
@@ -123,13 +126,15 @@ const Form = <T extends FormDetails>({
             return {
               name,
               id: name,
-              onChange: ({ name, value }: FieldChangeEvent<T[keyof T]>) =>
+              onChange: ({ name, value }: FieldChangeEvent<T[keyof T]>) => {
                 dispatch({
                   type: "set_field",
                   name,
                   value,
                   error: validate?.(value),
-                }),
+                });
+                setIsChanged(true);
+              },
               value: state.form[name],
               error: state.errors[name],
               disabled,
@@ -149,7 +154,7 @@ const Form = <T extends FormDetails>({
             <Submit
               data-testid="submit-button"
               type="submit"
-              disabled={disabled}
+              disabled={disabled || !isChanged}
               label={props.submitLabel ?? "Submit"}
             />
           </div>
