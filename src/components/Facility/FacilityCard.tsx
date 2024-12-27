@@ -63,7 +63,7 @@ export const FacilityCard = (props: {
           <div className="h-full w-full grow">
             <Link
               href={`/facility/${facility.id}`}
-              className="group relative z-0 flex w-full min-w-[15%] items-center justify-center self-stretch min-[425px]:hidden"
+              className="group relative z-0 flex w-full min-w-[15%] items-center justify-center self-stretch min-[640px]:hidden"
             >
               <Avatar
                 name={facility.name || ""}
