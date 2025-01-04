@@ -445,62 +445,20 @@ export default function PatientRegistration(
                 ))}
               </TabsList>
               <TabsContent value="dob">
-                <div className="flex items-center gap-2">
-                  <div className="flex-1">
-                    <InputWithError label={t("day")} required>
-                      <Input
-                        placeholder="DD"
-                        type="number"
-                        value={form.date_of_birth?.split("-")[2] || ""}
-                        maxLength={2}
-                        max={31}
-                        min={1}
-                        onChange={(e) =>
-                          setForm((f) => ({
-                            ...f,
-                            date_of_birth: `${form.date_of_birth?.split("-")[0] || ""}-${form.date_of_birth?.split("-")[1] || ""}-${e.target.value}`,
-                          }))
-                        }
-                      />
-                    </InputWithError>
-                  </div>
-                  <div className="flex-1">
-                    <InputWithError label={t("month")} required>
-                      <Input
-                        placeholder="MM"
-                        type="number"
-                        value={form.date_of_birth?.split("-")[1] || ""}
-                        maxLength={2}
-                        max={12}
-                        min={1}
-                        onChange={(e) =>
-                          setForm((f) => ({
-                            ...f,
-                            date_of_birth: `${form.date_of_birth?.split("-")[0] || ""}-${e.target.value}-${form.date_of_birth?.split("-")[2] || ""}`,
-                          }))
-                        }
-                      />
-                    </InputWithError>
-                  </div>
-                  <div className="flex-1">
-                    <InputWithError label={t("year")} required>
-                      <Input
-                        type="number"
-                        placeholder="YYYY"
-                        value={form.date_of_birth?.split("-")[0] || ""}
-                        maxLength={4}
-                        max={new Date().getFullYear()}
-                        min={1900}
-                        onChange={(e) =>
-                          setForm((f) => ({
-                            ...f,
-                            date_of_birth: `${e.target.value}-${form.date_of_birth?.split("-")[1] || ""}-${form.date_of_birth?.split("-")[2] || ""}`,
-                          }))
-                        }
-                      />
-                    </InputWithError>
-                  </div>
-                </div>
+                <InputWithError label={t("date_of_birth")} required>
+                  <Input
+                    type="date"
+                    value={form.date_of_birth || ""}
+                    max={new Date().toISOString().split("T")[0]}
+                    min="1900-01-01"
+                    onChange={(e) =>
+                      setForm((f) => ({
+                        ...f,
+                        date_of_birth: e.target.value,
+                      }))
+                    }
+                  />
+                </InputWithError>
                 {errors["date_of_birth"] && (
                   <InputErrors errors={errors["date_of_birth"]} />
                 )}
